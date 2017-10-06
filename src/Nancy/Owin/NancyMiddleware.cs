@@ -79,6 +79,10 @@
                             var clientCertificate = Get<X509Certificate>(environment, "ssl.ClientCertificate");
                             certificate = (clientCertificate == null) ? null : clientCertificate.GetRawCertData();
                         }
+                        
+                        //Check if the webform is not present inthe path ".aspx"
+                        //if present move to next
+                        if (owinRequestPath.ToLowerInvariant().Contains(".aspx")) return next.Invoke(environment);
 
                         var serverClientIp = Get<string>(environment, "server.RemoteIpAddress");
 
