@@ -82,7 +82,13 @@
                         
                         //Check if the webform is not present inthe path ".aspx"
                         //if present move to next
-                        if (owinRequestPath.ToLowerInvariant().Contains(".aspx")) return next.Invoke(environment);
+                        if (owinRequestPath.ToLowerInvariant().Contains(".aspx")
+                        || owinRequestPath.ToLowerInvariant().Contains(".asmx")
+                        || owinRequestPath.ToLowerInvariant().Contains(".ascx")
+                        || owinRequestPath.ToLowerInvariant().Contains(".ashx")
+                        || owinRequestPath.ToLowerInvariant().Contains(".asmx")
+                        || owinRequestPath.ToLowerInvariant().Contains(".asax")
+                        ) return next.Invoke(environment);
 
                         var serverClientIp = Get<string>(environment, "server.RemoteIpAddress");
 
